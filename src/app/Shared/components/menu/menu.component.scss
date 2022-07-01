@@ -1,0 +1,63 @@
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  position: relative;
+  z-index: 999;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logotip {
+
+  margin: 15px auto;
+  height: 32px;
+  transition: 0.5s;
+  position: relative;
+  z-index: 1;
+  width: 150px;
+
+  img.logo{
+    margin-top: 5px;
+    margin-left: 0px;
+    position: absolute;
+    width: 100%;
+    transition: 0.3s;
+  }
+
+  img.logo2{
+    margin-left: 10px;
+    margin-top: -10px;
+    width: 35%;
+    transition: 0.5s;
+  }
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 16px;
+}
+
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  height: 82.3vh;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.active{
+  background: #1890ff;
+  color: #ffffff;
+}

@@ -1,0 +1,120 @@
+
+<swal
+  #saveSwal
+  (confirm)="saveSwalFunc()"
+  [focusCancel]="true"
+  icon="success"
+  title="Успешно сохранено!">
+</swal>
+
+<swal
+  #warnSwal
+  (confirm)="warnSwalFunc()"
+  [focusCancel]="true"
+  icon="warning"
+  text="Попробуйте заного"
+  title="Что то пошло не так!">
+</swal>
+
+<div class="main">
+
+  <form nz-form [formGroup]="eposForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="eposId" nzRequired>Id</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Id!">
+        <input
+          nz-input
+          type="number"
+          id="eposId"
+          formControlName="eposId"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="termType" nzRequired>Term Type</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Term Type!">
+        <input
+          nz-input
+          type="termType"
+          id="termType"
+          formControlName="termType"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6"
+        [nzXs]="24"
+        nzFor="oper"
+        nzRequired
+      >
+        Oper
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your oper!">
+        <input nz-input id="oper" formControlName="oper" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="cardBranch" nzRequired>Card Branch</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input cardBranch!">
+        <input nz-input id="cardBranch" formControlName="cardBranch"  />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="termBranch" nzRequired>Term Branch</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input term Branch!">
+        <input nz-input id="termBranch" formControlName="termBranch"  />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="trExpt" nzRequired>Tr Type Expt</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Tr Type Expt!">
+        <input nz-input id="trExpt" formControlName="trExpt"  />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="trType" nzRequired>Tr Type B</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input trType!">
+        <input nz-input id="trType" formControlName="trType"  />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="mcc" nzRequired>MCC</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input mcc!">
+        <input nz-input id="mcc" formControlName="mcc"  />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="komis" nzRequired>Komis</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input komis!">
+        <input nz-input id="komis" formControlName="komis"  />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="terminal" nzRequired>Terminal</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input terminal!">
+        <input nz-input id="terminal" formControlName="terminal"  />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Send</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+

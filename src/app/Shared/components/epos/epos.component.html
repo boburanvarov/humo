@@ -1,0 +1,90 @@
+<p>epos works!</p>
+
+<swal
+  #saveSwal
+  (confirm)="saveSwalFunc()"
+  [focusCancel]="true"
+  icon="success"
+  title="Успешно сохранено!">
+</swal>
+
+<swal
+  #warnSwal
+  (confirm)="warnSwalFunc()"
+  [focusCancel]="true"
+  icon="warning"
+  text="Попробуйте заного"
+  title="Что то пошло не так!">
+</swal>
+<!--<input type="text" >-->
+<!--<button (click)="search($event.target)"> search</button>-->
+<nz-table
+  #editRowTable nzBordered
+  [nzData]="eposData"
+  nzTableLayout="fixed"
+  nzShowSizeChanger
+  [nzScroll]="{ x: '1200px', y: '550px' }">
+  <thead>
+  <tr>
+    <th >Id</th>
+    <th >Term Type</th>
+    <th >Oper</th>
+    <th >Card Branch</th>
+    <th >Term Branch</th>
+    <th >TypeExpt</th>
+    <th >TypeB</th>
+    <th >MCC</th>
+    <th >Komis</th>
+    <th >Terminal</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of editRowTable.data; let i = index">
+
+    <ng-container *ngIf="!eposList[i].edit; else editTemplate">
+<!--    <ng-container >-->
+      <td>{{ data.id }}</td>
+      <td>{{ data.term_TYPE }}</td>
+      <td>{{ data.oper }}</td>
+      <td>{{ data.card_BRANCH }}</td>
+      <td>{{ data.term_BRANCH }}</td>
+      <td>{{ data.tr_TYPE_EXPT ? data.tr_TYPE_EXPT : '-' }}</td>
+      <td>{{ data.tr_TYPE_B ? data.tr_TYPE_B : '-' }}</td>
+      <td>{{ data.mcc }}</td>
+      <td>{{ data.komis }}</td>
+      <td>{{ data.terminal }}</td>
+      <td class="btn-block">
+        <a (click)="startEdit(i)" class="edit">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+        <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteItem(data)" class="delete">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </ng-container>
+    <ng-template #editTemplate [formGroup]="eposForm">
+
+        <td><input type="text" nz-input formControlName="eposId" /></td>
+        <td><input type="text" nz-input formControlName="termType" /></td>
+        <td><input type="text" nz-input formControlName="oper" /></td>
+        <td><input type="text" nz-input formControlName="cardBranch" /></td>
+        <td><input type="text" nz-input formControlName="termBranch" /></td>
+        <td><input type="text" nz-input formControlName="trExpt" /></td>
+        <td><input type="text" nz-input formControlName="trType" /></td>
+        <td><input type="text" nz-input formControlName="mcc" /></td>
+        <td><input type="text" nz-input formControlName="komis" /></td>
+        <td><input type="text" nz-input formControlName="terminal" /></td>
+
+      <td class="btn-block">
+        <a (click)="saveEdit(i)" class="save">
+          <i nz-icon nzType="check" nzTheme="outline"></i>
+        </a>
+        <a  class="exit" (click)="cancelEdit(i)">
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </a>
+      </td>
+    </ng-template>
+  </tr>
+  </tbody>
+</nz-table>
