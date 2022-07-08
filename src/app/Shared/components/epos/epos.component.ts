@@ -20,9 +20,10 @@ export class EposComponent implements OnInit {
   eposData: any[] = [];
   editEposList: any;
   searchValue = '';
+  eposActive = true;
 
   eposForm = this.fb.group({
-    eposId: ['',  Validators.required],
+    eposId: ['', Validators.required],
     termType: ['', Validators.required],
     oper: ['', Validators.required],
     cardBranch: ['', Validators.required],
@@ -35,27 +36,74 @@ export class EposComponent implements OnInit {
   });
 
   constructor(
-    private  apiServices: ApiService,
+    private apiServices: ApiService,
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getEpos();
   }
 
-  saveSwalFunc() { }
-
-
-  warnSwalFunc() { }
-
-  search(event:any){
-    const filter = event.value
-    console.log()
-    this.eposData = this.eposList.filter((item: any) => item.id.indexOf(filter) !== -1);
-    console.log(this.eposData)
+  saveSwalFunc() {
   }
 
-  parseDate(item:any){
+
+  warnSwalFunc() {
+  }
+
+  search(): void {
+
+    this.eposData = []
+    this.eposList.forEach((item: any) => {
+
+      if (item == null) {
+        return
+      }else{
+
+        if(item.id == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item);
+
+        } else if(item.term_TYPE == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        } else if(item.oper == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        } else if(item.card_BRANCH == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        } else if(item.term_BRANCH == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }else if(item.tr_TYPE_EXPT == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }else if(item.tr_TYPE_B == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }else if(item.mcc == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }else if(item.komis == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }else if(item.terminal == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }
+      }
+    })
+    console.log(this.eposData);
+  }
+
+  resetFilter(){
+    this.searchValue = '';
+    this.getEpos()
+  }
+
+  parseDate(item: any) {
     this.eposForm.patchValue({
       eposId: item.id,
       termType: item.term_TYPE,
@@ -72,10 +120,10 @@ export class EposComponent implements OnInit {
   }
 
   startEdit(id: number): void {
-   this.eposList[id].edit = true;
+    this.eposList[id].edit = true;
 
-   this.editEposList = this.eposList[id]
-   this.parseDate(this.eposList[id])
+    this.editEposList = this.eposList[id]
+    this.parseDate(this.eposList[id])
 
   }
 
@@ -89,7 +137,7 @@ export class EposComponent implements OnInit {
     const eposEdit = this.eposForm.value;
     console.log(eposEdit)
 
-    const body ={
+    const body = {
       humoOperType: {
         id: this.editEposList.id,
         termType: this.editEposList.term_TYPE,
@@ -115,12 +163,12 @@ export class EposComponent implements OnInit {
         terminal: eposEdit.terminal
       }
     }
-    this.apiServices.editEpos(body).subscribe(res=>{
-        if(res){
+    this.apiServices.editEpos(body).subscribe(res => {
+        if (res) {
           this.getEpos();
           this.saveSwal.fire();
           this.eposList[id].edit = false;
-        }else{
+        } else {
           this.warnSwal.fire();
         }
       },
@@ -128,20 +176,20 @@ export class EposComponent implements OnInit {
         console.log(error)
         if (error.status === 404 || error.status === 500) {
           this.warnSwal.fire();
-        }else{
+        } else {
           this.warnSwal.fire();
         }
       })
 
   }
 
-  deleteItem(data:any){
+  deleteItem(data: any) {
     console.log(data)
 
-    const body ={
-      card_BRANCH:  data.card_BRANCH,
-      id:  data.id,
-      komis:  data.komis,
+    const body = {
+      card_BRANCH: data.card_BRANCH,
+      id: data.id,
+      komis: data.komis,
       mcc: data.mcc,
       oper: data.oper,
       term_BRANCH: data.term_BRANCH,
@@ -151,11 +199,11 @@ export class EposComponent implements OnInit {
       tr_TYPE_EXPT: data.tr_TYPE_EXPT
     }
     console.log(body)
-    this.apiServices.deleteEpos(body).subscribe(res=>{
-        if(res){
+    this.apiServices.deleteEpos(body).subscribe(res => {
+        if (res) {
           this.getEpos();
           this.saveSwal.fire();
-        }else{
+        } else {
           this.warnSwal.fire();
         }
       },
@@ -163,7 +211,7 @@ export class EposComponent implements OnInit {
         console.log(error)
         if (error.status === 404 || error.status === 500) {
           this.warnSwal.fire();
-        }else{
+        } else {
           this.warnSwal.fire();
         }
       })
@@ -171,14 +219,10 @@ export class EposComponent implements OnInit {
   }
 
 
-
-
-
-  getEpos(){
-    this.apiServices.allEpos().subscribe((res)=>{
-
-      this.eposList =res;
-      this.eposData = [...this.eposList];
+  getEpos() {
+    this.apiServices.allEpos().subscribe((res) => {
+      this.eposActive = true;
+      this.eposList = res;
       console.log(this.eposList)
       // this.eposList.forEach(item => {
       //   item.edit = false

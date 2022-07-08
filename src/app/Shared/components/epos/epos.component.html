@@ -16,11 +16,21 @@
   text="Попробуйте заного"
   title="Что то пошло не так!">
 </swal>
-<!--<input type="text" >-->
-<!--<button (click)="search($event.target)"> search</button>-->
+<div class="filter-block">
+  <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+  <button nz-button nzType="primary"  (click)="search()" class="search-button">
+    <i nz-icon nzType="search"></i>
+    Search
+  </button>
+  <button nz-button nzType="primary"  (click)="resetFilter()" class="search-button">
+    <i nz-icon nzType="clear"></i>
+    Clear Filter
+  </button>
+
+</div>
 <nz-table
   #editRowTable nzBordered
-  [nzData]="eposData"
+  [nzData]="eposActive ? eposList : eposData"
   nzTableLayout="fixed"
   nzShowSizeChanger
   [nzScroll]="{ x: '1200px', y: '550px' }">

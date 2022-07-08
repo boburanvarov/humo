@@ -15,7 +15,7 @@ export class ApiService {
   }
 
   allEpos(): Observable<any>{
-    return this.http.get(Api + 'findAlls?pageNo=1&pageSize=')
+    return this.http.get(Api + 'findAlls')
   }
 
   editEpos(body: any){
