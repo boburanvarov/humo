@@ -10,6 +10,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  updateStates(){
+    return this.http.get(Api + 'updateStatus')
+  }
+
   operType(body: any){
     return this.http.post(Api + 'insertInto', body)
   }
@@ -32,4 +36,6 @@ export class ApiService {
     };
     return this.http.delete<any>(Api + 'deleteEpos', options)
   }
+
+
 }

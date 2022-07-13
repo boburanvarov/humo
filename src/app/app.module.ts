@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 registerLocaleData(en);
 

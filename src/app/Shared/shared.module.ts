@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MenuComponent} from './components/menu/menu.component';
 import {NzLayoutModule} from "ng-zorro-antd/layout";
@@ -20,7 +20,7 @@ import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
   declarations: [
     MenuComponent,
     OperComponent,
-    EposComponent
+    EposComponent,
   ],
   imports: [
     CommonModule,
@@ -32,14 +32,16 @@ import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
     NzFormModule,
     NzInputModule,
     NzButtonModule,
-    SweetAlert2Module,
     NzTableModule,
     NzPopconfirmModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module
+
   ],
   exports: [
     MenuComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class SharedModule {
 }

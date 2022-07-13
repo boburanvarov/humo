@@ -40,6 +40,9 @@
 nz-header {
   background: #fff;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nz-content {
@@ -61,3 +64,12 @@ nz-footer {
   background: #1890ff;
   color: #ffffff;
 }
+
+.refresh-block{
+  margin-right: 20px;
+  font-size: 20px;
+ i{
+   cursor: pointer;
+ }
+}
+

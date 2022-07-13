@@ -1,5 +1,39 @@
 
 <nz-layout>
+
+<!--  <swal-->
+<!--    #saveSwal-->
+<!--    (confirm)="saveSwalFunc()"-->
+<!--    [focusCancel]="true"-->
+<!--    icon="success"-->
+<!--    text="{{errorCode}}"-->
+<!--    title="{{errorText}}">-->
+<!--  </swal>-->
+  <swal
+    #saveSwal
+    (confirm)="saveSwalFunc()"
+    [focusCancel]="true"
+    icon="success"
+  >
+    <div class="errorMessage" *swalPortal>
+      <h3>{{errorCode}}</h3>
+      <h4>{{errorText}}</h4>
+    </div>
+  </swal>
+
+  <swal
+    #errorSwal
+    (confirm)="errorSwalFunc()"
+    [focusCancel]="true"
+    icon="success"
+  >
+    <div class="errorMessage" *swalPortal>
+      <h3>{{errorCode}}</h3>
+      <h4>{{errorText}}</h4>
+    </div>
+  </swal>
+
+
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logotip" >
 
@@ -21,13 +55,19 @@
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
+    <nz-header class="header">
       <i
         class="trigger"
         nz-icon
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+      <div class="right-block">
+        <div class="refresh-block">
+          <i nz-icon [nzType]="'sync'" [nzSpin]="rotateActive" (click)="updateState()"></i>
+<!--          <i nz-icon nzType="reload" class="rotating" nzTheme="outline"></i>-->
+        </div>
+      </div>
     </nz-header>
     <nz-content>
 
