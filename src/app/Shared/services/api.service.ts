@@ -37,5 +37,13 @@ export class ApiService {
     return this.http.delete<any>(Api + 'deleteEpos', options)
   }
 
+  exptTransactions(): Observable<any>{
+    return this.http.get(Api + 'ExptTransactions')
+  }
+
+
+  bTransactions(): Observable<any>{
+    return this.http.get(Api + 'BTransactions')
+  }
 
 }

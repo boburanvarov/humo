@@ -51,6 +51,18 @@
         <i nz-icon nzType="team"></i>
         <span>Epos</span>
       </li>
+      <li nz-menu-item routerLink="exptTransactions" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i nz-icon nzType="credit-card" nzTheme="outline"></i>
+        <span>Expt Transactions</span>
+      </li>
+      <li nz-menu-item routerLink="bTransactions" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i nz-icon nzType="credit-card" nzTheme="outline"></i>
+        <span>B Transactions</span>
+      </li>
+      <li nz-menu-item routerLink="scanFile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i nz-icon nzType="scan" nzTheme="outline"></i>
+        <span>Scan File</span>
+      </li>
 
     </ul>
   </nz-sider>
@@ -64,8 +76,16 @@
       ></i>
       <div class="right-block">
         <div class="refresh-block">
-          <i nz-icon [nzType]="'sync'" [nzSpin]="rotateActive" (click)="updateState()"></i>
-<!--          <i nz-icon nzType="reload" class="rotating" nzTheme="outline"></i>-->
+          <i class="reload" nz-icon [nzType]="'sync'" [nzSpin]="rotateActive" (click)="updateState()"
+             routerLink="epos" ></i>
+        </div>
+        <div class="logout-block">
+          <i    nz-popconfirm
+                nzPopconfirmTitle="Are you sure you want to exit?"
+                (nzOnConfirm)="confirm()"
+                (nzOnCancel)="cancel()"
+                nzPopconfirmPlacement="bottomRight"
+            nz-icon nzType="logout" class="logout" nzTheme="outline"></i>
         </div>
       </div>
     </nz-header>
@@ -75,6 +95,6 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    <nz-footer>Ant Design ©2022 Implement By Angular</nz-footer>
   </nz-layout>
 </nz-layout>

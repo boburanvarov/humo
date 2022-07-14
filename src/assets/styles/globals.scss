@@ -1,0 +1,66 @@
+.btn-block{
+  font-size: 16px;
+  .exit{
+    color: red;
+    margin-left: 25px;
+  }
+  .delete{
+    color: red;
+    margin-left: 25px;
+  }
+  .save{
+    margin-left: 5px;
+    color: green;
+  }
+  .edit{
+    font-size: 18px !important;
+    color: #0090fd;
+  }
+
+}
+
+
+.filter-block{
+  display: flex;
+  align-items: center;
+  gap: 0 20px;
+  margin-bottom: 10px;
+  input{
+    width: 200px;
+  }
+  button{
+    height: 30px;
+  }
+
+}
+
+
+::ng-deep .ant-table-thead .ant-table-cell {
+  background-color: #04b03a;
+}
+
+::ng-deep .ant-table-tbody .ant-table-row .ant-table-cell {
+  cursor: pointer;
+}
+
+.modal-block{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+
+::ng-deep .ant-form-item-label > label{
+ display: block;
+  width: 100%;
+  font-weight: 600;
+}
+
+::ng-deep .ant-modal{
+  width: 1400px !important;
+  margin-left: 320px;
+}
+
+
+
+
+

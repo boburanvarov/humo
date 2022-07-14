@@ -15,29 +15,37 @@ import {NzButtonModule} from 'ng-zorro-antd/button';
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
+import { ExptTransactionsComponent } from './components/expt-transactions/expt-transactions.component';
+import { BTransactionsComponent } from './components/btransactions/btransactions.component';
+import {NzModalModule} from "ng-zorro-antd/modal";
+import { ScanfileComponent } from './components/scanfile/scanfile.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     OperComponent,
     EposComponent,
+    ExptTransactionsComponent,
+    BTransactionsComponent,
+    ScanfileComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzMenuModule,
-    RouterModule,
-    NzFormModule,
-    NzInputModule,
-    NzButtonModule,
-    NzTableModule,
-    NzPopconfirmModule,
-    FormsModule,
-    SweetAlert2Module
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzMenuModule,
+        RouterModule,
+        NzFormModule,
+        NzInputModule,
+        NzButtonModule,
+        NzTableModule,
+        NzPopconfirmModule,
+        FormsModule,
+        SweetAlert2Module,
+        NzModalModule
 
-  ],
+    ],
   exports: [
     MenuComponent
   ],

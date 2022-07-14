@@ -40,6 +40,14 @@ export class MenuComponent implements OnInit {
     // this.router.navigate([])
   }
 
+  cancel(): void {
+    console.log('cancel')
+  }
+
+  confirm(): void {
+    console.log('ok')
+    this.router.navigate(['auth'])
+  }
 
   updateState() {
     this.rotateActive = true;

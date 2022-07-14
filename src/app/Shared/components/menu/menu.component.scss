@@ -65,11 +65,22 @@ nz-footer {
   color: #ffffff;
 }
 
-.refresh-block{
+.right-block{
+  display: flex;
+  align-items: center;
+  gap: 0 30px;
   margin-right: 20px;
-  font-size: 20px;
+  font-size: 25px;
  i{
    cursor: pointer;
  }
+  .logout:hover{
+    color: red;
+  }
+
+  .reload:hover{
+    color: #1890ff;
+  }
+
 }
 
