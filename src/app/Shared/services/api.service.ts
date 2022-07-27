@@ -46,4 +46,16 @@ export class ApiService {
     return this.http.get(Api + 'BTransactions')
   }
 
+  scanFile(file: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        accept: '*/*',
+        contentType: 'application/x-www-form-urlencoded',
+      }),
+      responseType: 'text',
+    };
+    // @ts-ignore
+    return this.http.post<any>(Api + 'scanCSVFile', file, httpOptions)
+  }
+
 }
