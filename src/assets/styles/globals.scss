@@ -74,6 +74,11 @@
   margin-left: 320px;
 }
 
+::ng-deep .ant-modal-content {
+  margin-top: -40px;
+  margin-left: 90px !important;
+}
+
 
 
 
