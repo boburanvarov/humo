@@ -45,15 +45,15 @@ nz-header {
   justify-content: space-between;
 }
 
-nz-content {
+
+nz-content{
   margin: 16px;
 }
-
 
 .inner-content {
   padding: 24px;
   background: #fff;
-  height: auto;
+  min-height: 83.9vh;
 }
 
 nz-footer {
