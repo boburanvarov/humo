@@ -33,28 +33,28 @@ export class MenuComponent implements OnInit {
   }
 
   errorSwalFunc() {
-    // this.router.navigate([])
+    location.reload()
   }
 
   saveSwalFunc() {
-    // this.router.navigate([])
+    location.reload()
   }
 
   cancel(): void {
-    console.log('cancel')
+
   }
 
   confirm(): void {
-    console.log('ok')
+
     this.router.navigate(['auth'])
   }
 
   updateState() {
     this.rotateActive = true;
-    console.log('ok')
+
     this.apiService.updateStates().subscribe(
       (res) => {
-        console.log(res, 'res')
+
         if (res) {
           this.saveSwal.fire();
           this.rotateActive = false;
@@ -76,7 +76,7 @@ export class MenuComponent implements OnInit {
           this.rotateActive = false;
           this.errorCode = error.status;
           this.errorText = error.error.text;
-          console.log(error);
+
         }
 
       },

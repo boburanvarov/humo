@@ -19,6 +19,7 @@ import { ExptTransactionsComponent } from './components/expt-transactions/expt-t
 import { BTransactionsComponent } from './components/btransactions/btransactions.component';
 import {NzModalModule} from "ng-zorro-antd/modal";
 import { ScanfileComponent } from './components/scanfile/scanfile.component';
+import {LoadingComponent} from "./components/loading/loading.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ScanfileComponent } from './components/scanfile/scanfile.component';
     ExptTransactionsComponent,
     BTransactionsComponent,
     ScanfileComponent,
+    LoadingComponent,
   ],
     imports: [
         CommonModule,

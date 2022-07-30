@@ -22,12 +22,16 @@ export class ApiService {
     return this.http.get(Api + 'findAlls')
   }
 
+  findEpos(data: any): Observable<any>{
+    return this.http.get(Api + `findEposInfo?terminal=${data}`)
+  }
+
   editEpos(body: any){
     return this.http.post(Api + 'updateEposs', body)
   }
 
   deleteEpos(body: any){
-    console.log(body)
+
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -50,7 +54,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        contentType: 'application/x-www-form-urlencoded',
+        contentType: 'application/json',
       }),
       responseType: 'text',
     };

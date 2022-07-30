@@ -70,7 +70,7 @@ export class OperComponent implements OnInit {
         }
       },
         (error) => {
-          console.log(error)
+
           if (error.status === 404 || error.status === 500) {
             this.warnSwal.fire();
           }else{

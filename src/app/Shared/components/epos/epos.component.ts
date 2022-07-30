@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
+import {LoadingService} from "../../services/loading.service";
 
 @Component({
   selector: 'app-epos',
@@ -36,6 +37,8 @@ export class EposComponent implements OnInit {
   });
 
   constructor(
+
+    public loadingService: LoadingService,
     private apiServices: ApiService,
     private fb: FormBuilder
   ) {
@@ -60,7 +63,10 @@ export class EposComponent implements OnInit {
       if (item == null) {
         return
       }else{
-
+        if(item.terminal == this.searchValue){
+          this.eposActive = false;
+          this.eposData.push(item)
+        }
         if(item.id == this.searchValue){
           this.eposActive = false;
           this.eposData.push(item);
@@ -89,13 +95,9 @@ export class EposComponent implements OnInit {
         }else if(item.komis == this.searchValue){
           this.eposActive = false;
           this.eposData.push(item)
-        }else if(item.terminal == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
         }
       }
     })
-    console.log(this.eposData);
   }
 
   resetFilter(){
@@ -132,10 +134,9 @@ export class EposComponent implements OnInit {
   }
 
   saveEdit(id: number): void {
-    console.log(id);
-    console.log(this.editEposList, 'editlist')
+
     const eposEdit = this.eposForm.value;
-    console.log(eposEdit)
+
 
     const body = {
       humoOperType: {
@@ -173,7 +174,7 @@ export class EposComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error)
+
         if (error.status === 404 || error.status === 500) {
           this.warnSwal.fire();
         } else {
@@ -184,7 +185,7 @@ export class EposComponent implements OnInit {
   }
 
   deleteItem(data: any) {
-    console.log(data)
+
 
     const body = {
       card_BRANCH: data.card_BRANCH,
@@ -198,7 +199,7 @@ export class EposComponent implements OnInit {
       tr_TYPE_B: data.tr_TYPE_B,
       tr_TYPE_EXPT: data.tr_TYPE_EXPT
     }
-    console.log(body)
+
     this.apiServices.deleteEpos(body).subscribe(res => {
         if (res) {
           this.getEpos();
@@ -208,7 +209,7 @@ export class EposComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error)
+
         if (error.status === 404 || error.status === 500) {
           this.warnSwal.fire();
         } else {
@@ -223,7 +224,7 @@ export class EposComponent implements OnInit {
     this.apiServices.allEpos().subscribe((res) => {
       this.eposActive = true;
       this.eposList = res;
-      console.log(this.eposList)
+
       // this.eposList.forEach(item => {
       //   item.edit = false
       // });

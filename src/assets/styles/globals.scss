@@ -1,3 +1,11 @@
+
+.loading-container{
+  z-index: 99999;
+  width: 100%;
+  height: 100vh;
+}
+
+
 .btn-block{
   font-size: 16px;
   .exit{
@@ -19,13 +27,13 @@
 
 }
 
-
 .filter-block{
   display: flex;
   align-items: center;
   gap: 0 20px;
   margin-bottom: 10px;
   input{
+
     width: 200px;
   }
   button{
@@ -43,8 +51,15 @@
   }
 
   input {
+    background-color: #f0f0f0;
     display: block;
     width: 100%;
+    height: 35px;
+    border-radius: 55px;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
   }
 }
 
