@@ -54,7 +54,7 @@ textarea{
   position: relative;
   background-color: #f0f0f0;
   display: block;
-  max-height: 55px;
+  margin-bottom: 10px;
   border-radius: 5px;
   //resize: none;
 }
@@ -88,6 +88,12 @@ textarea{
 ::ng-deep .ant-modal-content {
   margin-top: -40px;
   margin-left: 90px !important;
+}
+
+.err-block{
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 
