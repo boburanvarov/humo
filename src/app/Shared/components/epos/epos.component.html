@@ -2,7 +2,7 @@
   <app-loading></app-loading>
 </div>
 
-<h4>Epos works!</h4>
+<h4  *ngIf=" eposList.length > 0">Epos works!</h4>
 
 <swal
   #saveSwal
@@ -20,8 +20,62 @@
   text="Попробуйте заного"
   title="Что то пошло не так!">
 </swal>
-<div class="filter-block">
-  <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+<div class="filter-block"  *ngIf=" eposList.length > 0">
+
+  <form [formGroup]="filterForm">
+
+    <nz-form-item>
+      <nz-form-label nzFor="Id">Id</nz-form-label>
+      <input nz-input id="Id" formControlName="id" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="termType">Term Type</nz-form-label>
+      <input nz-input id="termType" formControlName="termType" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="oper">Oper</nz-form-label>
+      <input nz-input id="oper" formControlName="oper" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="cardBranch">Card Branch</nz-form-label>
+      <input nz-input id="cardBranch" formControlName="cardBranch" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="termBranch">Term Branch</nz-form-label>
+      <input nz-input id="termBranch" formControlName="termBranch"/>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="typeExpt">TypeExpt</nz-form-label>
+      <input nz-input id="typeExpt" formControlName="typeExpt" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="typeB">TypeB</nz-form-label>
+      <input nz-input id="typeB" formControlName="typeB" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="mcc">MCC</nz-form-label>
+      <input nz-input id="mcc" formControlName="mcc" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="komis">Komis</nz-form-label>
+      <input nz-input id="komis" formControlName="komis" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="terminal">Terminal</nz-form-label>
+      <input nz-input id="terminal" formControlName="terminal" />
+    </nz-form-item>
+
+  </form>
+<div class="btn-block">
   <button nz-button nzType="primary"  (click)="search()" class="search-button">
     <i nz-icon nzType="search"></i>
     Search
@@ -30,9 +84,10 @@
     <i nz-icon nzType="clear"></i>
     Clear Filter
   </button>
+</div>
 
 </div>
-<nz-table
+<nz-table  *ngIf=" eposList.length > 0"
   #editRowTable nzBordered
   [nzData]="eposActive ? eposList : eposData"
   nzTableLayout="fixed"

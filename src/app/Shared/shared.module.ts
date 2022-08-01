@@ -20,6 +20,7 @@ import { BTransactionsComponent } from './components/btransactions/btransactions
 import {NzModalModule} from "ng-zorro-antd/modal";
 import { ScanfileComponent } from './components/scanfile/scanfile.component';
 import {LoadingComponent} from "./components/loading/loading.component";
+import {AutosizeModule} from "ngx-autosize";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {LoadingComponent} from "./components/loading/loading.component";
         NzPopconfirmModule,
         FormsModule,
         SweetAlert2Module,
-        NzModalModule
+        NzModalModule,
+        AutosizeModule
 
     ],
   exports: [

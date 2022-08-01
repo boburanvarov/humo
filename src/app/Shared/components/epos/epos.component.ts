@@ -21,7 +21,7 @@ export class EposComponent implements OnInit {
   eposData: any[] = [];
   editEposList: any;
   searchValue = '';
-  eposActive = true;
+  eposActive?: boolean;
 
   eposForm = this.fb.group({
     eposId: ['', Validators.required],
@@ -36,12 +36,26 @@ export class EposComponent implements OnInit {
     terminal: ['', Validators.required],
   });
 
+  filterForm = this.fb.group({
+    id: [''],
+    termType: [''],
+    oper: [''],
+    cardBranch: [''],
+    termBranch: [''],
+    typeExpt: [''],
+    typeB: [''],
+    mcc: [''],
+    komis: [''],
+    terminal: [''],
+  });
+
   constructor(
 
     public loadingService: LoadingService,
     private apiServices: ApiService,
     private fb: FormBuilder
   ) {
+    console.log()
   }
 
   ngOnInit(): void {
@@ -56,52 +70,27 @@ export class EposComponent implements OnInit {
   }
 
   search(): void {
-
+    const filtervalue = this.filterForm.value;
     this.eposData = []
-    this.eposList.forEach((item: any) => {
-
+    this.eposList.filter((item: any) => {
       if (item == null) {
         return
       }else{
-        if(item.terminal == this.searchValue){
+        if( item.id == filtervalue.id || item.term_TYPE == filtervalue.termType || item.oper == filtervalue.oper ||
+          item.card_BRANCH == filtervalue.cardBranch || item.term_BRANCH == filtervalue.termBranch || item.tr_TYPE_EXPT == filtervalue.typeExpt ||
+          item.tr_TYPE_B == filtervalue.typeB || item.mcc == filtervalue.mcc || item.komis == filtervalue.komis || item.terminal == filtervalue.terminal  ){
           this.eposActive = false;
           this.eposData.push(item)
         }
-        if(item.id == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item);
 
-        } else if(item.term_TYPE == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        } else if(item.oper == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        } else if(item.card_BRANCH == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        } else if(item.term_BRANCH == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        }else if(item.tr_TYPE_EXPT == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        }else if(item.tr_TYPE_B == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        }else if(item.mcc == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        }else if(item.komis == this.searchValue){
-          this.eposActive = false;
-          this.eposData.push(item)
-        }
       }
     })
   }
 
   resetFilter(){
-    this.searchValue = '';
+    this.eposData = []
+    this.filterForm.reset()
+    location.reload()
     this.getEpos()
   }
 
