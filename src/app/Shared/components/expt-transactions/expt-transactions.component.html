@@ -1,0 +1,247 @@
+
+<div *ngIf="loadingService.isLoading | async" class="loading-container">
+  <app-loading></app-loading>
+</div>
+
+<h4  *ngIf=" exptTransactionsList.length > 0">Expt Transactions works!</h4>
+
+<nz-table
+  *ngIf=" exptTransactionsList.length > 0"
+  #editRowTable nzBordered
+  [nzData]="exptTransactionsList"
+  nzTableLayout="fixed"
+  nzShowSizeChanger
+  [nzScroll]="{ x: '1200px', y: '550px' }">
+  <thead class="table-head">
+  <tr>
+    <th>Id</th>
+    <th>Term ID</th>
+    <th>Tran DATE TIME</th>
+    <th>Abvr NAME</th>
+    <th>Empc FILE ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of editRowTable.data; let i = index">
+
+    <td (click)="itemInfo(data)">{{ data.id }}</td>
+    <td (click)="itemInfo(data)">{{ data.term_ID }}</td>
+    <td (click)="itemInfo(data)">{{ data.tran_DATE_TIME }}</td>
+    <td (click)="itemInfo(data)">{{ data.abvr_NAME }}</td>
+    <td (click)="itemInfo(data)">{{ data.empc_FILE_ID }}</td>
+
+  </tr>
+  </tbody>
+</nz-table  >
+
+<nz-modal
+  *ngIf=" exptTransactionsList.length > 0"
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle>Id: {{this.exptTransaction.id}}</ng-template>
+
+  <ng-template #modalContent>
+
+
+    <form [formGroup]="exptForm" class="modal-block">
+      <div class="err-block">
+        <nz-form-label nzFor="err">Err</nz-form-label>
+        <textarea nz-input id="err" formControlName="err" readonly autosize></textarea>
+      </div>
+
+      <nz-form-item>
+        <nz-form-label nzFor="stat">Stat</nz-form-label>
+        <input nz-input id="stat" formControlName="stat" readonly/>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label nzFor="file">File</nz-form-label>
+        <input nz-input id="file" formControlName="file" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="id">Id</nz-form-label>
+        <input nz-input id="id" formControlName="id" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="termId">Term Id</nz-form-label>
+        <input nz-input id="termId" formControlName="term_ID" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tranz_ACCT">Tranz ACCT</nz-form-label>
+        <input nz-input id="tranz_ACCT" formControlName="tranz_ACCT" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_AMT">Tran AMT</nz-form-label>
+        <input nz-input id="tran_AMT" formControlName="tran_AMT" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_AMT2">Tran AMT2</nz-form-label>
+        <input nz-input id="tran_AMT2" formControlName="tran_AMT2" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_TYPE">Tran TYPE</nz-form-label>
+        <input nz-input id="tran_TYPE" formControlName="tran_TYPE" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_TYPE2">Tran TYPE2</nz-form-label>
+        <input nz-input id="tran_TYPE2" formControlName="tran_TYPE2" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_DATE_TIME">Tran DATE TIME</nz-form-label>
+        <input nz-input id="tran_DATE_TIME" formControlName="tran_DATE_TIME" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="empc_FILE_ID">empc FILE ID</nz-form-label>
+        <input nz-input id="empc_FILE_ID" formControlName="empc_FILE_ID" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="tran_CCY">Tran CCY</nz-form-label>
+        <input nz-input id="tran_CCY" formControlName="tran_CCY" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="line_NUMBER">Line NUMBER</nz-form-label>
+        <input nz-input id="line_NUMBER" formControlName="line_NUMBER" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="rec_DATE">Rec DATE</nz-form-label>
+        <input nz-input id="rec_DATE" formControlName="rec_DATE" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="post_DATE">Post DATE</nz-form-label>
+        <input nz-input id="post_DATE" formControlName="post_DATE" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="client">Client</nz-form-label>
+        <input nz-input id="client" formControlName="client" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="accnt_AMT">Accnt AMT</nz-form-label>
+        <input nz-input id="accnt_AMT" formControlName="accnt_AMT" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="terminal">Terminal</nz-form-label>
+        <input nz-input id="terminal" formControlName="terminal" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="merchant">Merchant</nz-form-label>
+        <input nz-input id="merchant" formControlName="merchant" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="abvr_NAME">Abvr NAME</nz-form-label>
+        <input nz-input id="abvr_NAME" formControlName="abvr_NAME" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="proc_ID">Proc ID</nz-form-label>
+        <input nz-input id="proc_ID" formControlName="proc_ID" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="internal_NO">Internal NO</nz-form-label>
+        <input nz-input id="internal_NO" formControlName="internal_NO" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="product">Product</nz-form-label>
+        <input nz-input id="product" formControlName="product" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="accnt_CCY">Accnt CCY</nz-form-label>
+        <input nz-input id="accnt_CCY" formControlName="accnt_CCY" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="city">City</nz-form-label>
+        <input nz-input id="city" formControlName="city" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="card_ACCT">Card ACCT</nz-form-label>
+        <input nz-input id="card_ACCT" formControlName="card_ACCT" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="country">Country</nz-form-label>
+        <input nz-input id="country" formControlName="country" readonly/>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label nzFor="card">Card</nz-form-label>
+        <input nz-input id="card" formControlName="card" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="ref_NUMBER">Ref NUMBER</nz-form-label>
+        <input nz-input id="ref_NUMBER" formControlName="ref_NUMBER" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="record_TYPE">Record TYPE</nz-form-label>
+        <input nz-input id="record_TYPE" formControlName="record_TYPE" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="deb_CRED">Deb CRED</nz-form-label>
+        <input nz-input id="deb_CRED" formControlName="deb_CRED" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="mcc_CODE">Mcc CODE</nz-form-label>
+        <input nz-input id="mcc_CODE" formControlName="mcc_CODE" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="iss_MFO">Iss MFO</nz-form-label>
+        <input nz-input id="iss_MFO" formControlName="iss_MFO" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="slip_NR">Slip NR</nz-form-label>
+        <input nz-input id="slip_NR" formControlName="slip_NR" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="deal_DESC">Deal DESC</nz-form-label>
+        <input nz-input id="deal_DESC" formControlName="deal_DESC" readonly/>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="state_ID">State ID</nz-form-label>
+        <input nz-input id="state_ID" formControlName="state_ID" readonly/>
+      </nz-form-item>
+
+    </form>
+
+
+  </ng-template>
+
+  <ng-template #modalFooter>
+
+
+  </ng-template>
+</nz-modal>

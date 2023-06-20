@@ -1,0 +1,90 @@
+<swal
+  #saveSwal
+  (confirm)="saveSwalFunc()"
+  [focusCancel]="true"
+  icon="success"
+>
+  <div class="errorMessage" *swalPortal>
+    <h4>{{errorText}}</h4>
+  </div>
+</swal>
+
+<swal
+  #errorSwal
+  (confirm)="errorSwalFunc()"
+  [focusCancel]="true"
+  icon="success"
+>
+  <div class="errorMessage" *swalPortal>
+    <h4>{{errorText}}</h4>
+  </div>
+</swal>
+<div class="excel-group ">
+  <h5 class="excel-text">
+    Fayl .CSV formatda bo'lishi shart
+  </h5>
+  <form class="excel-btn-group" [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+
+<!---->
+    <div class="file-upload">
+      <label class="custom-file-upload">
+        <p class="pi pi-download upload-icon"></p>
+        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+               maxFileSize="1000000" (onUpload)="onBasicUpload($event)"
+               (change)="onFileSelect($event)" name="profile"/>
+        {{ profile.value ? profile.value?.['name'] : 'Выберите файл CSV'}}
+      </label>
+
+      <div class="upload-valid-box" *ngIf="profile.touched && profile?.invalid">
+        <p class="upload-valid" *ngIf="profile.errors?.['required']">Пожалуйста, выберите файл</p>
+      </div>
+    </div>
+
+    <button class="openNew" type="submit">Отправить</button>
+
+  </form>
+</div>
+
+<div class="example-block">
+  <a class="example-title" href="../../../../assets/example.csv">Namuna faylini ko'chirib olish</a>
+
+  <div class="item-block">
+    <div class="img-block">
+      <img src="../../../../assets/example1.png" alt="#">
+    </div>
+    <span class="text">
+        <p>
+      number ustuni albatta bo'lishi kerak, u o'zimiz uchun, 1 2 3 4 5 6 ketma ketlikda yoziladi. Bazaga borib
+      yozilmaydi!
+    </p>
+    <p>number ustuni bo'lmasa, ID ustuni uni o'rniga o'tib qoladi va bazaga ID qiymati yozilmay qoladi.</p>
+    </span>
+  </div>
+
+
+  <div class="item-block">
+    <div class="img-block">
+      <img src="../../../../assets/examples2.png" alt="#">
+    </div>
+    <span class="text">
+        <p>
+      agar qaysidir ustunga qiymat yozmoqchi bo'lmasangiz shunchaki vergul qo'yib keyingi qiymatga o'tib keting!
+    </p>
+    <p>null deb kiritmang, bo'lmasa bazaga "null" so'zi ko'rinishda yozilib qoladi!.</p>
+    </span>
+  </div>
+
+
+  <div class="item-block">
+    <div class="img-block">
+      <img src="../../../../assets/examples3.png" alt="#">
+    </div>
+    <span class="text text2">
+        <p>
+      birinchi qatorda albatta quyidagi o'zgaruvchilar nomi bo'lishi kerak, bo'lmasa qaysi ustun qaysi qiymatga tegishliligini bilib bo'lmaydi!
+    </p>
+    <p >yozilmagan ustun, bazaga NULL (qiymat kiritilmagan) ko'rinishda yoziladi.</p>
+  </span>
+  </div>
+
+</div>

@@ -1,0 +1,613 @@
+<div *ngIf="loadingService.isLoading | async" class="loading-container">
+  <app-loading></app-loading>
+</div>
+
+  <p *ngIf="bTransactionsList.length > 0">B Transactions works!</p>
+
+  <nz-table
+    *ngIf="bTransactionsList.length > 0"
+    #editRowTable nzBordered
+    [nzData]="bTransactionsList"
+    nzTableLayout="fixed"
+    nzShowSizeChanger
+    [nzScroll]="{ x: '1200px', y: '550px' }">
+    <thead class="table-head">
+    <tr>
+      <th>Id</th>
+      <th>File DATE</th>
+      <th>Abvr NAME</th>
+      <th>Empc FILE ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of editRowTable.data; let i = index">
+
+      <td (click)="itemInfo(data)">{{ data.id }}</td>
+      <td (click)="itemInfo(data)">{{ data.file_DATE }}</td>
+      <td (click)="itemInfo(data)">{{ data.abvr_NAME }}</td>
+      <td (click)="itemInfo(data)">{{ data.empc_FILE_ID }}</td>
+
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-modal
+
+    *ngIf="bTransactionsList.length > 0"
+    [(nzVisible)]="isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()"
+  >
+    <ng-template #modalTitle>Id: {{this.bTransaction.id}}</ng-template>
+
+    <ng-template #modalContent>
+
+
+      <form [formGroup]="bTransactionForm" class="modal-block">
+      <div class="err-block">
+          <nz-form-label nzFor="err">Err</nz-form-label>
+          <textarea nz-input id="err" formControlName="err" readonly autosize></textarea>
+      </div>
+        <nz-form-item>
+          <nz-form-label nzFor="stat">Stat</nz-form-label>
+          <input nz-input id="stat" formControlName="stat" readonly/>
+        </nz-form-item>
+
+
+
+        <nz-form-item>
+          <nz-form-label nzFor="file">File</nz-form-label>
+          <input nz-input id="file" formControlName="file" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="id">Id</nz-form-label>
+          <input nz-input id="id" formControlName="id" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="source_ALGORITHM">Source ALGORITHM</nz-form-label>
+          <input nz-input id="source_ALGORITHM" formControlName="source_ALGORITHM" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="epi_42_48_FULL">Epi 42 48 FULL</nz-form-label>
+          <input nz-input id="epi_42_48_FULL" formControlName="epi_42_48_FULL" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="merchant_ACCEPT">Merchant ACCEPT</nz-form-label>
+          <input nz-input id="merchant_ACCEPT" formControlName="merchant_ACCEPT" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="clearing_GROUP">Clearing GROUP</nz-form-label>
+          <input nz-input id="clearing_GROUP" formControlName="clearing_GROUP" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="state_ID">State ID</nz-form-label>
+          <input nz-input id="state_ID" formControlName="state_ID" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="empc_FILE_ID">Empc FILE ID</nz-form-label>
+          <input nz-input id="empc_FILE_ID" formControlName="empc_FILE_ID" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="card">Card</nz-form-label>
+          <input nz-input id="card" formControlName="card" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="slip_NR">Slip NR</nz-form-label>
+          <input nz-input id="slip_NR" formControlName="slip_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="city">city</nz-form-label>
+          <input nz-input id="city" formControlName="city" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="country">Country</nz-form-label>
+          <input nz-input id="country" formControlName="country" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="merchant">Merchant</nz-form-label>
+          <input nz-input id="merchant" formControlName="merchant" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="abvr_NAME">Abvr NAME</nz-form-label>
+          <input nz-input id="abvr_NAME" formControlName="abvr_NAME" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="tran_TYPE">Tran TYPE</nz-form-label>
+          <input nz-input id="tran_TYPE" formControlName="tran_TYPE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="terminal">Terminal</nz-form-label>
+          <input nz-input id="terminal" formControlName="terminal" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="mcc_CODE">MCC CODE</nz-form-label>
+          <input nz-input id="mcc_CODE" formControlName="mcc_CODE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="ref_NUMBER">Ref NUMBER</nz-form-label>
+          <input nz-input id="ref_NUMBER" formControlName="ref_NUMBER" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="rec_NUM">Rec NUM</nz-form-label>
+          <input nz-input id="rec_NUM" formControlName="rec_NUM" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="mtid">MTID</nz-form-label>
+          <input nz-input id="mtid" formControlName="mtid" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="rec_CENTR">rec_CENTR</nz-form-label>
+          <input nz-input id="rec_CENTR" formControlName="rec_CENTR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="send_CENTR">Send CENTR</nz-form-label>
+          <input nz-input id="send_CENTR" formControlName="send_CENTR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="iss_CMI">ISS CMI</nz-form-label>
+          <input nz-input id="iss_CMI" formControlName="iss_CMI" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="appr_SRC">APPR SRC</nz-form-label>
+          <input nz-input id="appr_SRC" formControlName="appr_SRC" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="appr_CODE">APPR CODE</nz-form-label>
+          <input nz-input id="appr_CODE" formControlName="appr_CODE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="cash_BACK">Cash BACK</nz-form-label>
+          <input nz-input id="cash_BACK" formControlName="cash_BACK" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="currency">Currency</nz-form-label>
+          <input nz-input id="currency" formControlName="currency" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="amount">Amount</nz-form-label>
+          <input nz-input id="amount" formControlName="amount" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="send_CMI">Send CMI</nz-form-label>
+          <input nz-input id="send_CMI" formControlName="send_CMI" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="e_TIME">E TIME</nz-form-label>
+          <input nz-input id="e_TIME" formControlName="e_TIME" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="ccy_EXP">CCY EXP</nz-form-label>
+          <input nz-input id="ccy_EXP" formControlName="ccy_EXP" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="acq_BANK">ACQ BANK</nz-form-label>
+          <input nz-input id="acq_BANK" formControlName="acq_BANK" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="batch_NR">Batch NR</nz-form-label>
+          <input nz-input id="batch_NR" formControlName="batch_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="acq_BRANCH">ACQ BRANCH</nz-form-label>
+          <input nz-input id="acq_BRANCH" formControlName="acq_BRANCH" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="member">Member</nz-form-label>
+          <input nz-input id="member" formControlName="member" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="exp_DATE">Exp DATE</nz-form-label>
+          <input nz-input id="exp_DATE" formControlName="exp_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fee">Fee</nz-form-label>
+          <input nz-input id="fee" formControlName="fee" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="stan">Stan</nz-form-label>
+          <input nz-input id="stan" formControlName="stan" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_AMOUNT">SB AMOUNT</nz-form-label>
+          <input nz-input id="sb_AMOUNT" formControlName="sb_AMOUNT" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_CNVRATE">SB CNVRATE</nz-form-label>
+          <input nz-input id="sb_CNVRATE" formControlName="sb_CNVRATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_FEE">SB FEE</nz-form-label>
+          <input nz-input id="sb_FEE" formControlName="sb_FEE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_CNVDATE">SB CNVDATE</nz-form-label>
+          <input nz-input id="sb_CNVDATE" formControlName="sb_CNVDATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_AMOUNT">I AMOUNT</nz-form-label>
+          <input nz-input id="i_AMOUNT" formControlName="i_AMOUNT" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_CSHBACK">I CSHBACK</nz-form-label>
+          <input nz-input id="i_CSHBACK" formControlName="i_CSHBACK" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_FEE">I FEE</nz-form-label>
+          <input nz-input id="i_FEE" formControlName="i_FEE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="settl_CMI">settl_CMI</nz-form-label>
+          <input nz-input id="settl_CMI" formControlName="settl_CMI" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="ibnk_CCY">Ibnk CCY</nz-form-label>
+          <input nz-input id="ibnk_CCY" formControlName="ibnk_CCY" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_CCYEXP">I CCYEXP</nz-form-label>
+          <input nz-input id="i_CCYEXP" formControlName="i_CCYEXP" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_CCYEXP">SB CCYEXP</nz-form-label>
+          <input nz-input id="sb_CCYEXP" formControlName="sb_CCYEXP" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="e_DATE">E DATE</nz-form-label>
+          <input nz-input id="e_DATE" formControlName="e_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sbnk_CCY">Sbnk CCY</nz-form-label>
+          <input nz-input id="sbnk_CCY" formControlName="sbnk_CCY" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="sb_CSHBACK">SB CSHBACK</nz-form-label>
+          <input nz-input id="sb_CSHBACK" formControlName="sb_CSHBACK" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="card_SEQ_NR">Card SEQ NR</nz-form-label>
+          <input nz-input id="card_SEQ_NR" formControlName="card_SEQ_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="file_DATE">File DATE</nz-form-label>
+          <input nz-input id="file_DATE" formControlName="file_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="file_ID">File ID</nz-form-label>
+          <input nz-input id="file_ID" formControlName="file_ID" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_AMOUNT">PR AMOUNT</nz-form-label>
+          <input nz-input id="pr_AMOUNT" formControlName="pr_AMOUNT" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_FEE">PR FEE</nz-form-label>
+          <input nz-input id="pr_FEE" formControlName="pr_FEE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="ms_NUMBER">MS NUMBER</nz-form-label>
+          <input nz-input id="ms_NUMBER" formControlName="ms_NUMBER" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="moto_IND">Moto IND</nz-form-label>
+          <input nz-input id="moto_IND" formControlName="moto_IND" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="term_NR">Term NR</nz-form-label>
+          <input nz-input id="term_NR" formControlName="term_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_CNVDATE">PR CNVDATE</nz-form-label>
+          <input nz-input id="pr_CNVDATE" formControlName="pr_CNVDATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="susp_STATUS">Susp STATUS</nz-form-label>
+          <input nz-input id="susp_STATUS" formControlName="susp_STATUS" readonly/>
+        </nz-form-item>
+        <!--    -->
+        <!--      -->
+        <nz-form-item>
+          <nz-form-label nzFor="prnk_CCY">prnk CCY</nz-form-label>
+          <input nz-input id="prnk_CCY" formControlName="prnk_CCY" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="transact_ROW">transact_ROW</nz-form-label>
+          <input nz-input id="transact_ROW" formControlName="transact_ROW" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_CSHBACK">pr_CSHBACK</nz-form-label>
+          <input nz-input id="pr_CSHBACK" formControlName="pr_CSHBACK" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_CNVDATE">i CNVDATE</nz-form-label>
+          <input nz-input id="i_CNVDATE" formControlName="i_CNVDATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="msg_TYPE">msg TYPE</nz-form-label>
+          <input nz-input id="msg_TYPE" formControlName="msg_TYPE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="batch_ID">batch_ID</nz-form-label>
+          <input nz-input id="batch_ID" formControlName="batch_ID" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="card_TYPE">card TYPE</nz-form-label>
+          <input nz-input id="card_TYPE" formControlName="card_TYPE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="acqref_NR">acqref NR</nz-form-label>
+          <input nz-input id="acqref_NR" formControlName="acqref_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="proc_CLASS">proc CLASS</nz-form-label>
+          <input nz-input id="proc_CLASS" formControlName="proc_CLASS" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="org_MSG_TYPE">org MSG TYPE</nz-form-label>
+          <input nz-input id="org_MSG_TYPE" formControlName="org_MSG_TYPE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="settl_DATE">settl DATE</nz-form-label>
+          <input nz-input id="settl_DATE" formControlName="settl_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_CCYEXP">pr CCYEXP</nz-form-label>
+          <input nz-input id="pr_CCYEXP" formControlName="pr_CCYEXP" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="pr_CNVRATE">pr CNVRATE</nz-form-label>
+          <input nz-input id="pr_CNVRATE" formControlName="pr_CNVRATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="point_CODE">point CODE</nz-form-label>
+          <input nz-input id="point_CODE" formControlName="point_CODE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="i_CNVRATE">i CNVRATE</nz-form-label>
+          <input nz-input id="i_CNVRATE" formControlName="i_CNVRATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="ecmc_FEE">ecmc FEE</nz-form-label>
+          <input nz-input id="ecmc_FEE" formControlName="ecmc_FEE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="e_REGION">e REGION</nz-form-label>
+          <input nz-input id="e_REGION" formControlName="e_REGION" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="tran_INFO">tran INFO</nz-form-label>
+          <input nz-input id="tran_INFO" formControlName="tran_INFO" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="settl_NR">settl NR</nz-form-label>
+          <input nz-input id="settl_NR" formControlName="settl_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="proc_CODE">proc CODE</nz-form-label>
+          <input nz-input id="proc_CODE" formControlName="proc_CODE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="msg_CATEGORY">msg CATEGORY</nz-form-label>
+          <input nz-input id="msg_CATEGORY" formControlName="msg_CATEGORY" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="tr_FEE">tr FEE</nz-form-label>
+          <input nz-input id="tr_FEE" formControlName="tr_FEE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_043">fld_043</nz-form-label>
+          <input nz-input id="fld_043" formControlName="fld_043" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_SH6">fld_SH6</nz-form-label>
+          <input nz-input id="fld_SH6" formControlName="fld_SH6" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="msc">msc</nz-form-label>
+          <input nz-input id="msc" formControlName="msc" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="batch_DATE">batch_DATE</nz-form-label>
+          <input nz-input id="batch_DATE" formControlName="batch_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="account_NR">account_NR</nz-form-label>
+          <input nz-input id="account_NR" formControlName="account_NR" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_123_1">fld_123_1</nz-form-label>
+          <input nz-input id="fld_123_1" formControlName="fld_123_1" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_095">fld_095</nz-form-label>
+          <input nz-input id="fld_095" formControlName="fld_095" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="authoriz_ROW">authoriz_ROW</nz-form-label>
+          <input nz-input id="authoriz_ROW" formControlName="authoriz_ROW" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_098">fld_098</nz-form-label>
+          <input nz-input id="fld_098" formControlName="fld_098" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_FEE1">other_FEE1</nz-form-label>
+          <input nz-input id="other_FEE1" formControlName="other_FEE1" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_FEE2">other_FEE2</nz-form-label>
+          <input nz-input id="other_FEE2" formControlName="other_FEE2" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_039">fld_039</nz-form-label>
+          <input nz-input id="fld_039" formControlName="fld_039" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_040">fld_040</nz-form-label>
+          <input nz-input id="fld_040" formControlName="fld_040" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_FEE4">other_FEE4</nz-form-label>
+          <input nz-input id="other_FEE4" formControlName="other_FEE4" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_102">fld_102</nz-form-label>
+          <input nz-input id="fld_102" formControlName="fld_102" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_103">fld_103</nz-form-label>
+          <input nz-input id="fld_103" formControlName="fld_103" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_104">fld_104</nz-form-label>
+          <input nz-input id="fld_104" formControlName="fld_104" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_CODE">other_CODE</nz-form-label>
+          <input nz-input id="other_CODE" formControlName="other_CODE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_015">fld_015</nz-form-label>
+          <input nz-input id="fld_015" formControlName="fld_015" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="epi_42_48">epi_42_48</nz-form-label>
+          <input nz-input id="epi_42_48" formControlName="epi_42_48" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="audit_DATE">audit_DATE</nz-form-label>
+          <input nz-input id="audit_DATE" formControlName="audit_DATE" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_FEE3">other_FEE3</nz-form-label>
+          <input nz-input id="other_FEE3" formControlName="other_FEE3" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="other_FEE5">other_FEE5</nz-form-label>
+          <input nz-input id="other_FEE5" formControlName="other_FEE5" readonly/>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="fld_003">fld_003</nz-form-label>
+          <input nz-input id="fld_003" formControlName="fld_003" readonly/>
+        </nz-form-item>
+
+
+
+
+      </form>
+
+
+    </ng-template>
+
+    <ng-template #modalFooter>
+
+
+    </ng-template>
+  </nz-modal>
